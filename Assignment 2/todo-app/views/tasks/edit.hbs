@@ -1,0 +1,93 @@
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="card shadow">
+        <div class="card-body p-4">
+          <h2 class="mb-4">
+            <i class="fas fa-edit"></i> Edit Task
+          </h2>
+
+          <form action="/tasks/edit/{{task._id}}" method="POST">
+            <div class="mb-3">
+              <label for="title" class="form-label">Task Title *</label>
+              <input 
+                type="text" 
+                class="form-control" 
+                id="title" 
+                name="title" 
+                value="{{task.title}}"
+                required
+              >
+            </div>
+
+            <div class="mb-3">
+              <label for="description" class="form-label">Description</label>
+              <textarea 
+                class="form-control" 
+                id="description" 
+                name="description" 
+                rows="3"
+              >{{task.description}}</textarea>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="priority" class="form-label">Priority</label>
+                <select class="form-select" id="priority" name="priority">
+                  <option value="low" {{#if (eq task.priority 'low')}}selected{{/if}}>Low</option>
+                  <option value="medium" {{#if (eq task.priority 'medium')}}selected{{/if}}>Medium</option>
+                  <option value="high" {{#if (eq task.priority 'high')}}selected{{/if}}>High</option>
+                </select>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label for="dueDate" class="form-label">Due Date</label>
+                <input 
+                  type="date" 
+                  class="form-control" 
+                  id="dueDate" 
+                  name="dueDate"
+                  {{#if task.dueDate}}
+                    value="{{task.dueDate}}"
+                  {{/if}}
+                >
+              </div>
+            </div>
+
+            <div class="mb-3 form-check">
+              <input 
+                type="checkbox" 
+                class="form-check-input" 
+                id="completed" 
+                name="completed"
+                {{#if task.completed}}checked{{/if}}
+              >
+              <label class="form-check-label" for="completed">
+                Mark as completed
+              </label>
+            </div>
+
+            <div class="d-flex gap-2">
+              <button type="submit" class="btn btn-primary">
+                <i class="fas fa-save"></i> Save Changes
+              </button>
+              <a href="/tasks" class="btn btn-secondary">
+                <i class="fas fa-times"></i> Cancel
+              </a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Format date for input field
+  const dateInput = document.getElementById('dueDate');
+  if (dateInput.value) {
+    const date = new Date(dateInput.value);
+    const formattedDate = date.toISOString().split('T')[0];
+    dateInput.value = formattedDate;
+  }
+</script>

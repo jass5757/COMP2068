@@ -1,0 +1,96 @@
+<div class="container my-5">
+  <div class="row mb-4">
+    <div class="col-md-8">
+      <h1><i class="fas fa-tasks"></i> My Tasks</h1>
+      <p class="text-muted">Manage your personal task list</p>
+    </div>
+    <div class="col-md-4 text-end">
+      <a href="/tasks/add" class="btn btn-primary">
+        <i class="fas fa-plus"></i> Add New Task
+      </a>
+    </div>
+  </div>
+
+  <div class="notification-badge mb-4" id="notificationBadge" style="display: none;">
+    <div class="alert alert-warning">
+      <i class="fas fa-exclamation-triangle"></i>
+      <span id="notificationMessage"></span>
+    </div>
+  </div>
+
+  {{#if tasks}}
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th width="50">Status</th>
+            <th>Task</th>
+            <th>Priority</th>
+            <th>Due Date</th>
+            <th width="150">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each tasks}}
+            <tr class="{{#if this.completed}}table-secondary{{/if}} {{#if (isOverdue this.dueDate)}}table-danger{{/if}}">
+              <td>
+                <form action="/tasks/toggle/{{this._id}}" method="POST" class="d-inline">
+                  <button type="submit" class="btn btn-sm btn-link p-0">
+                    {{#if this.completed}}
+                      <i class="fas fa-check-circle text-success fa-lg"></i>
+                    {{else}}
+                      <i class="far fa-circle text-muted fa-lg"></i>
+                    {{/if}}
+                  </button>
+                </form>
+              </td>
+              <td>
+                <strong class="{{#if this.completed}}text-decoration-line-through{{/if}}">
+                  {{this.title}}
+                </strong>
+                {{#if this.description}}
+                  <br><small class="text-muted">{{this.description}}</small>
+                {{/if}}
+              </td>
+              <td>
+                <span class="badge bg-{{#if (eq this.priority 'high')}}danger{{else}}{{#if (eq this.priority 'medium')}}warning{{else}}success{{/if}}{{/if}}">
+                  {{this.priority}}
+                </span>
+              </td>
+              <td>
+                {{#if this.dueDate}}
+                  {{formatDate this.dueDate}}
+                  {{#if (isOverdue this.dueDate)}}
+                    <br><span class="badge bg-danger">Overdue</span>
+                  {{/if}}
+                  {{#if (isDueToday this.dueDate)}}
+                    <br><span class="badge bg-warning">Due Today</span>
+                  {{/if}}
+                {{else}}
+                  <span class="text-muted">No due date</span>
+                {{/if}}
+              </td>
+              <td>
+                <a href="/tasks/edit/{{this._id}}" class="btn btn-sm btn-outline-primary" title="Edit">
+                  <i class="fas fa-edit"></i>
+                </a>
+                <a href="/tasks/delete/{{this._id}}" class="btn btn-sm btn-outline-danger" title="Delete">
+                  <i class="fas fa-trash"></i>
+                </a>
+              </td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  {{else}}
+    <div class="text-center py-5">
+      <i class="fas fa-clipboard-list fa-5x text-muted mb-3"></i>
+      <h3>No tasks yet</h3>
+      <p class="text-muted">Create your first task to get started!</p>
+      <a href="/tasks/add" class="btn btn-primary">
+        <i class="fas fa-plus"></i> Add Your First Task
+      </a>
+    </div>
+  {{/if}}
+</div>

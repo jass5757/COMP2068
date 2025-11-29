@@ -1,0 +1,14 @@
+<footer class="bg-dark text-white text-center py-4 mt-5">
+  <div class="container">
+    <p>&copy; 2024 To-Do List App. Built with Express, MongoDB & Handlebars.</p>
+    <p class="mb-0">
+      <a href="/" class="text-white me-3">Home</a>
+      <a href="/public-tasks" class="text-white me-3">Browse Tasks</a>
+      {{#if user}}
+        <a href="/tasks" class="text-white">My Tasks</a>
+      {{else}}
+        <a href="/auth/login" class="text-white">Login</a>
+      {{/if}}
+    </p>
+  </div>
+</footer>

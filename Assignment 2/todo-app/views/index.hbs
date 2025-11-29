@@ -1,0 +1,82 @@
+<div class="hero-section">
+  <div class="container">
+    <div class="row align-items-center min-vh-100">
+      <div class="col-lg-6">
+        <h1 class="display-3 fw-bold mb-4">Organize Your Life with Ease</h1>
+        <p class="lead mb-4">
+          A simple and powerful to-do list application to help you stay organized and productive. 
+          Create tasks, set priorities, track deadlines, and never miss an important task again.
+        </p>
+        <div class="d-flex gap-3">
+          {{#if user}}
+            <a href="/tasks" class="btn btn-primary btn-lg">
+              <i class="fas fa-list"></i> View My Tasks
+            </a>
+            <a href="/tasks/add" class="btn btn-outline-primary btn-lg">
+              <i class="fas fa-plus"></i> Add New Task
+            </a>
+          {{else}}
+            <a href="/auth/register" class="btn btn-primary btn-lg">
+              <i class="fas fa-user-plus"></i> Get Started
+            </a>
+            <a href="/auth/login" class="btn btn-outline-primary btn-lg">
+              <i class="fas fa-sign-in-alt"></i> Login
+            </a>
+          {{/if}}
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="feature-image text-center">
+          <i class="fas fa-tasks fa-10x text-primary opacity-75"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="features-section py-5 bg-light">
+  <div class="container">
+    <h2 class="text-center mb-5">Why Choose Our To-Do List?</h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body text-center">
+            <i class="fas fa-check-circle fa-3x text-success mb-3"></i>
+            <h4>Easy Task Management</h4>
+            <p>Create, edit, and delete tasks with a simple and intuitive interface.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body text-center">
+            <i class="fas fa-bell fa-3x text-warning mb-3"></i>
+            <h4>Smart Notifications</h4>
+            <p>Get notified about overdue tasks and upcoming deadlines automatically.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body text-center">
+            <i class="fas fa-flag fa-3x text-danger mb-3"></i>
+            <h4>Priority Levels</h4>
+            <p>Organize tasks by priority (high, medium, low) to focus on what matters.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="cta-section py-5">
+  <div class="container text-center">
+    <h2 class="mb-4">Ready to Get Organized?</h2>
+    <p class="lead mb-4">Join us today and start managing your tasks efficiently!</p>
+    {{#unless user}}
+      <a href="/auth/register" class="btn btn-primary btn-lg">
+        <i class="fas fa-rocket"></i> Sign Up Now
+      </a>
+    {{/unless}}
+  </div>
+</div>
